@@ -9,11 +9,12 @@ import com.mybooking.entities.Venue;
  */
 public class BookingApp {
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
 		Venue venue = Venue.getInstance();
 		TicketService ts = new TicketServiceImpl(venue);
+		System.out.println("Ticket Service started !!!");
+		
+		
 		SeatHold sh = ts.findAndHoldSeats(3, "a@a.com");
-		System.out.println(sh.getSeatHoldId());
-		System.out.println(venue);
+		System.out.println("Venue (After Hold) : "+venue);
 	}
 }

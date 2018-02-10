@@ -14,13 +14,21 @@ public class SeatHold {
 	private String customerEmail;
 	private int noOfSeatsHeld;
 	private List<Seat> seatsHeld;
+	private long holdingTime;
 
-	public SeatHold(String seatHoldId, String customerEmail, int noOfSeatsHeld, List<Seat> seatsHeld) {
+	public SeatHold(String seatHoldId, String customerEmail, int noOfSeatsHeld) {
 		super();
 		this.seatHoldId = seatHoldId;
 		this.customerEmail = customerEmail;
 		this.noOfSeatsHeld = noOfSeatsHeld;
-		this.seatsHeld = seatsHeld;
+	}
+
+	public long getHoldingTime() {
+		return holdingTime;
+	}
+
+	public void setHoldingTime(long holdingTime) {
+		this.holdingTime = holdingTime;
 	}
 
 	public String getSeatHoldId() {

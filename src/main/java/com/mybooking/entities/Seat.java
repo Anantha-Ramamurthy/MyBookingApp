@@ -9,7 +9,7 @@ package com.mybooking.entities;
  */
 public class Seat {
 	private int seatNbr;
-	private int bookingID; // TODO DO we need this
+	// private int bookingID; // TODO DO we need this
 	private boolean booked = false;
 
 	public Seat(int seatNbr) {
@@ -33,14 +33,19 @@ public class Seat {
 		return this;
 	}
 
-	public int getBookingID() {
+/*	public int getBookingID() {
 		return bookingID;
 	}
 
 	public void setBookingID(int bookingID) {
 		this.bookingID = bookingID;
-	}
+	}*/
 
+	public void resetBooking()
+	{
+		this.booked = false;
+	}
+	
 	public String toString() {
 		return "[" + String.valueOf(this.seatNbr) + ":" + String.valueOf(this.booked) + "]";
 	}

@@ -2,6 +2,8 @@ package com.mybooking.entities;
 
 import java.util.*;
 
+import com.mybooking.myapp.EvictorThread;
+
 /**
  * Singleton representation of the Venue. This is the simplest implementation
  * of the Singleton pattern without doing double checked locking etc. The class is
@@ -23,6 +25,8 @@ public class Venue {
 			throw new IllegalStateException("Singleton already in place");
 		}
 		reset();
+		// Start the Hold Evictor thread.
+		new Thread(new EvictorThread()).start();
 	}
 
 	public void reset() {
@@ -32,27 +36,13 @@ public class Venue {
 		}
 		this.seatHolds = new HashMap<String, SeatHold>(); // TODO Use concur version for better performance
 		this.seatReserved = new HashMap<String, SeatReserve>();
+		System.out.println("Venue Initialized with capacity : " + capacity);
 	}
 
 	// getInstance should be used to instantiate the singleton
 	public static Venue getInstance() {
 		return instance;
 	}
-	/*
-	 * public void loadVenueOld(int rows, int seatsPerRow) { this.seats = new
-	 * ArrayList<List<Seat>>(); for (int i=0; i<rows; i++) { List<Seat> seatsInARow
-	 * = new ArrayList<Seat>(); for (int j=0; i<seatsPerRow; j++) {
-	 * seatsInARow.add(new Seat(j)); } seats.add(seatsInARow); } }
-	 */
-
-	/*
-	 * public void loadVenue(int rows, int seatsPerRow) { int startRowChar =
-	 * Character.getNumericValue('A'); this.seatMap = new HashMap<String,
-	 * List<Seat>>(); for (int i=0; i<rows; i++) { List<Seat> seatsInARow = new
-	 * ArrayList<Seat>(); for (int j=0; i<seatsPerRow; j++) { seatsInARow.add(new
-	 * Seat(j)); } seatMap.put(String.valueOf(startRowChar+i), seatsInARow); }
-	 * this.capacity = rows*seatsPerRow; }
-	 */
 
 	public Map<String, SeatReserve> getSeatReserved() {
 		return seatReserved;
@@ -86,12 +76,6 @@ public class Venue {
 		this.seatReserved = seatReserved;
 	}
 
-	/*
-	 * public Map<String, List<Seat>> getSeatMap() { return seatMap; }
-	 * 
-	 * public void setSeatMap(Map<String, List<Seat>> seatMap) { this.seatMap =
-	 * seatMap; }
-	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for (Seat seat : this.getSeats()) {

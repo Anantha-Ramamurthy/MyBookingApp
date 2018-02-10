@@ -58,25 +58,28 @@ public class TicketServiceImpl implements TicketService {
 		// Loop through the seats in the Venue and block the seats available first.
 		String seatHoldId = VenueUtil.getUUID().toString();
 		List<Seat> seatsHeld = new ArrayList<Seat>();
-		SeatHold result = new SeatHold(seatHoldId, customerEmail, numSeats, null);
-		System.out.println(venue.getCapacity());
+		SeatHold seatHold = new SeatHold(seatHoldId, customerEmail, numSeats);
+
 		synchronized (this.venue) {
-			// Double checking availability for solving concurrency and performance
+			// Double checking availability
 			if (numSeats > this.numSeatsAvailable()) {
 				System.out.println(VenueUtil.UNAVAILABLE);
 				return null;
 			}
 			for (Seat seat : this.venue.getSeats()) {
 				if (!seat.isBooked() && seatsHeld.size() < numSeats) {
-					System.out.println("Adding seat: " + seat.getSeatNbr());
+					System.out.println("Holding seat : " + seat.getSeatNbr());
 					seatsHeld.add(seat.setBooked(true));
 				} else if (seatsHeld.size() >= numSeats)
 					break;
 			}
-			result.setSeatsHeld(seatsHeld);
-			this.venue.getSeatHolds().put(seatHoldId, result);
+			seatHold.setSeatsHeld(seatsHeld);
+			seatHold.setHoldingTime(Calendar.getInstance().getTimeInMillis());
+			//System.out.println("Seats Held at : " + Calendar.getInstance().getTimeInMillis());
+			this.venue.getSeatHolds().put(seatHoldId, seatHold);
 		}
-		return result;
+		System.out.println("Hold Identifier : " + seatHoldId);
+		return seatHold;
 	}
 
 }
