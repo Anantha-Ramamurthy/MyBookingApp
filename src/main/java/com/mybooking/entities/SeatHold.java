@@ -21,6 +21,7 @@ public class SeatHold {
 		this.seatHoldId = seatHoldId;
 		this.customerEmail = customerEmail;
 		this.noOfSeatsHeld = noOfSeatsHeld;
+		this.seatsHeld = new ArrayList<Seat>();
 	}
 
 	public long getHoldingTime() {
@@ -57,10 +58,6 @@ public class SeatHold {
 
 	public List<Seat> getSeatsHeld() {
 		return seatsHeld;
-	}
-
-	public void setSeatsHeld(List<Seat> seatsHeld) {
-		this.seatsHeld = seatsHeld;
 	}
 
 }

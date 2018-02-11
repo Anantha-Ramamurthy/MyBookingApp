@@ -43,6 +43,6 @@ public interface TicketService {
 	 *            assigned
 	 * @return a reservation confirmation code
 	 */
-	String reserveSeats(int seatHoldId, String customerEmail);
+	String reserveSeats(String seatHoldId, String customerEmail);
 
 }

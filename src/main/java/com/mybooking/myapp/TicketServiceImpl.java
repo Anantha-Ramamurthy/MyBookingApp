@@ -5,8 +5,10 @@ package com.mybooking.myapp;
 
 import java.util.*;
 
+
 import com.mybooking.entities.Seat;
 import com.mybooking.entities.SeatHold;
+import com.mybooking.entities.SeatReserve;
 import com.mybooking.entities.Venue;
 import com.mybooking.utilities.VenueUtil;
 
@@ -36,11 +38,27 @@ public class TicketServiceImpl implements TicketService {
 	 * 
 	 * @see com.mybooking.myapp.TicketService#reserveSeats(int, java.lang.String)
 	 */
-	public String reserveSeats(int seatHoldId, String customerEmail) {
-		// Synchronize this call
-		// Look for the SeatHoldMap using the ID; update the seats as booked and
-		// copy them over to the Reservation Map using the same key
-		return null;
+	public String reserveSeats(String seatHoldId, String customerEmail) {
+		if (VenueUtil.isEmpty(seatHoldId) || VenueUtil.isEmpty(customerEmail)) {
+			System.out.println(VenueUtil.INVALID_INPUT);
+			return "ERROR";
+		}
+		if (this.venue.getSeatHolds().get(seatHoldId) == null) {
+			System.out.println(VenueUtil.INVALID_HOLD_ID);
+			return "ERROR";
+		}
+		if (!customerEmail.equalsIgnoreCase(this.venue.getSeatHolds().get(seatHoldId).getCustomerEmail())) {
+			System.out.println(VenueUtil.EMAIL_ID_NOT_VALID_FOR_HOLD);
+			return "ERROR";
+		}
+				
+		synchronized (this.venue) {
+			SeatReserve seatReserve = VenueUtil.holdToReserved(this.venue.getSeatHolds().get(seatHoldId));
+			this.venue.getSeatReserved().put(seatHoldId, seatReserve);
+			this.venue.getSeatHolds().remove(seatHoldId);
+		}
+		System.out.println("Booking Identifier : " + seatHoldId);
+		return seatHoldId;
 	}
 
 	/*
@@ -57,9 +75,10 @@ public class TicketServiceImpl implements TicketService {
 
 		// Loop through the seats in the Venue and block the seats available first.
 		String seatHoldId = VenueUtil.getUUID().toString();
-		List<Seat> seatsHeld = new ArrayList<Seat>();
-		SeatHold seatHold = new SeatHold(seatHoldId, customerEmail, numSeats);
 
+		SeatHold seatHold = new SeatHold(seatHoldId, customerEmail, numSeats);
+		List<Seat> seatsHeld = seatHold.getSeatsHeld();
+		
 		synchronized (this.venue) {
 			// Double checking availability
 			if (numSeats > this.numSeatsAvailable()) {
@@ -73,7 +92,7 @@ public class TicketServiceImpl implements TicketService {
 				} else if (seatsHeld.size() >= numSeats)
 					break;
 			}
-			seatHold.setSeatsHeld(seatsHeld);
+			//seatHold.setSeatsHeld(seatsHeld);
 			seatHold.setHoldingTime(Calendar.getInstance().getTimeInMillis());
 			//System.out.println("Seats Held at : " + Calendar.getInstance().getTimeInMillis());
 			this.venue.getSeatHolds().put(seatHoldId, seatHold);

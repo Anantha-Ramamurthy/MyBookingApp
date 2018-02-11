@@ -9,7 +9,6 @@ package com.mybooking.entities;
  */
 public class Seat {
 	private int seatNbr;
-	// private int bookingID; // TODO DO we need this
 	private boolean booked = false;
 
 	public Seat(int seatNbr) {

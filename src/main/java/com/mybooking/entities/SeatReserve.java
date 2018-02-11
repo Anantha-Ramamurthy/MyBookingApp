@@ -14,7 +14,15 @@ public class SeatReserve {
 	private String reservationId;
 	private String customerEmail;
 	private int noOfSeatsBooked;
-	private Map<String, List<Seat>> seatsBooked;
+	private List<Seat> seatsBooked;
+	
+	public SeatReserve(String reservationId, String customerEmail, int noOfSeatsBooked) {
+		super();
+		this.reservationId = reservationId;
+		this.customerEmail = customerEmail;
+		this.noOfSeatsBooked = noOfSeatsBooked;
+		this.seatsBooked = new ArrayList<Seat>();
+	}
 
 	public String getReservationId() {
 		return reservationId;
@@ -40,7 +48,7 @@ public class SeatReserve {
 		this.noOfSeatsBooked = noOfSeatsBooked;
 	}
 
-	public Map<String, List<Seat>> getSeatsBooked() {
+	public List<Seat> getSeatsBooked() {
 		return seatsBooked;
 	}
 }

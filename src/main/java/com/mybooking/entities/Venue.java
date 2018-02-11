@@ -17,7 +17,7 @@ public class Venue {
 	private static Venue instance = new Venue();
 	private int capacity = 10;
 	private Map<String, SeatHold> seatHolds;
-	private Map<String, SeatReserve> seatReserved;
+	private Map<String, SeatReserve> seatsReserved;
 	private List<Seat> seats;
 
 	private Venue() {
@@ -35,7 +35,7 @@ public class Venue {
 			this.seats.add(new Seat(i));
 		}
 		this.seatHolds = new HashMap<String, SeatHold>(); // TODO Use concur version for better performance
-		this.seatReserved = new HashMap<String, SeatReserve>();
+		this.seatsReserved = new HashMap<String, SeatReserve>();
 		System.out.println("Venue Initialized with capacity : " + capacity);
 	}
 
@@ -45,7 +45,7 @@ public class Venue {
 	}
 
 	public Map<String, SeatReserve> getSeatReserved() {
-		return seatReserved;
+		return seatsReserved;
 	}
 
 	public Map<String, SeatHold> getSeatHolds() {
@@ -73,7 +73,7 @@ public class Venue {
 	}
 
 	public void setSeatReserved(Map<String, SeatReserve> seatReserved) {
-		this.seatReserved = seatReserved;
+		this.seatsReserved = seatReserved;
 	}
 
 	public String toString() {
