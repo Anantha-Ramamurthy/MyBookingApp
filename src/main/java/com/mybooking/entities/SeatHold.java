@@ -4,7 +4,9 @@ package com.mybooking.entities;
 import java.util.*;
 
 /**
- * This class models the information on the Seats Being Held for a customer;
+ * This class models the information on the Seats being held for a customer;
+ * <br>The seatHold is identified by a Seat Hold Identifier. 
+ * <br>The Customer holding the seats is identified using an email id.
  * 
  * @author anantha.ramamurthy
  *
