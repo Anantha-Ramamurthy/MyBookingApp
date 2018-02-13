@@ -30,7 +30,8 @@ public class BookingApp {
 	public static void main(String[] args) throws Exception {
 		Venue venue = Venue.getInstance();
 		TicketService ts = new TicketServiceImpl(venue);
-		System.out.println("Venue Initialized with capacity : " + venue.getCapacity());
+		System.out.println();System.out.println();System.out.println();
+		System.out.println("<<<<<     Venue Initialized with capacity : " + venue.getCapacity() + "     >>>>>");
 		System.out.println(BookingAppConstants.LINE_STR);
 		System.out.println("Ticket Service started !!!");
 		System.out.println(BookingAppConstants.LINE_STR);

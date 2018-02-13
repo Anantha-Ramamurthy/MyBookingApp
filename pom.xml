@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<venue.capacity>venue.capacity</venue.capacity>
-		<venue.capacity.value>15</venue.capacity.value>
+		<venue.capacity.value>50</venue.capacity.value>
 		<evictor.cycleTime>evictor.cycleTime</evictor.cycleTime>
 		<evictor.cycleTime.value>25000</evictor.cycleTime.value>
 		<seat.expirationTime>seat.expirationTime</seat.expirationTime>
@@ -119,7 +119,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<description>This is an implentation of the Ticketing Service Application, that helps customer hold and confirm seats at a Venue. 
+	<description>This is an implementation of the Ticketing Service Application, that helps customer hold and confirm seats at a Venue. 
 					
 The best available seats are considered to be the ones closer to the stage.
 
