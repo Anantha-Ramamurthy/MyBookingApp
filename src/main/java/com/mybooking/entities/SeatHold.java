@@ -4,7 +4,9 @@ package com.mybooking.entities;
 import java.util.*;
 
 /**
- * This class models the information on the Seats Being Held for a customer;
+ * This class models the information on the Seats being held for a customer;
+ * <br>The seatHold is identified by a Seat Hold Identifier. 
+ * <br>The Customer holding the seats is identified using an email id.
  * 
  * @author anantha.ramamurthy
  *
@@ -14,13 +16,22 @@ public class SeatHold {
 	private String customerEmail;
 	private int noOfSeatsHeld;
 	private List<Seat> seatsHeld;
+	private long holdingTime;
 
-	public SeatHold(String seatHoldId, String customerEmail, int noOfSeatsHeld, List<Seat> seatsHeld) {
+	public SeatHold(String seatHoldId, String customerEmail, int noOfSeatsHeld) {
 		super();
 		this.seatHoldId = seatHoldId;
 		this.customerEmail = customerEmail;
 		this.noOfSeatsHeld = noOfSeatsHeld;
-		this.seatsHeld = seatsHeld;
+		this.seatsHeld = new ArrayList<Seat>();
+	}
+
+	public long getHoldingTime() {
+		return holdingTime;
+	}
+
+	public void setHoldingTime(long holdingTime) {
+		this.holdingTime = holdingTime;
 	}
 
 	public String getSeatHoldId() {
@@ -49,10 +60,6 @@ public class SeatHold {
 
 	public List<Seat> getSeatsHeld() {
 		return seatsHeld;
-	}
-
-	public void setSeatsHeld(List<Seat> seatsHeld) {
-		this.seatsHeld = seatsHeld;
 	}
 
 }

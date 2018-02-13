@@ -4,8 +4,9 @@ package com.mybooking.entities;
 import java.util.*;
 
 /**
- * This class models the information on the Seats that have been booked for a
- * customer;
+ * This class models the information on the Seats that have been booked and confirmed for a customer.
+ * <br>The booking is identified by a unique Reservation Identifier.
+ * <br>The customer is identified using an email id.
  * 
  * @author anantha.ramamurthy
  *
@@ -14,7 +15,15 @@ public class SeatReserve {
 	private String reservationId;
 	private String customerEmail;
 	private int noOfSeatsBooked;
-	private Map<String, List<Seat>> seatsBooked;
+	private List<Seat> seatsBooked;
+
+	public SeatReserve(String reservationId, String customerEmail, int noOfSeatsBooked) {
+		super();
+		this.reservationId = reservationId;
+		this.customerEmail = customerEmail;
+		this.noOfSeatsBooked = noOfSeatsBooked;
+		this.seatsBooked = new ArrayList<Seat>();
+	}
 
 	public String getReservationId() {
 		return reservationId;
@@ -40,7 +49,7 @@ public class SeatReserve {
 		this.noOfSeatsBooked = noOfSeatsBooked;
 	}
 
-	public Map<String, List<Seat>> getSeatsBooked() {
+	public List<Seat> getSeatsBooked() {
 		return seatsBooked;
 	}
 }
