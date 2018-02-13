@@ -13,9 +13,9 @@
 		<venue.capacity>venue.capacity</venue.capacity>
 		<venue.capacity.value>15</venue.capacity.value>
 		<evictor.cycleTime>evictor.cycleTime</evictor.cycleTime>
-		<evictor.cycleTime.value>10000</evictor.cycleTime.value>
+		<evictor.cycleTime.value>25000</evictor.cycleTime.value>
 		<seat.expirationTime>seat.expirationTime</seat.expirationTime>
-		<seat.expirationTime.value>10000</seat.expirationTime.value>
+		<seat.expirationTime.value>25000</seat.expirationTime.value>
 	</properties>
 
 	<dependencies>

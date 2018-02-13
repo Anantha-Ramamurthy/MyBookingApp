@@ -93,6 +93,11 @@ public class TicketServiceImpl implements TicketService {
 		}
 
 		synchronized (this.venue) {
+			// Double check if the hold exists, as the Evictor could have claimed the seats held by now.
+			if (!VenueUtil.checkHold(seatHoldId, this.venue)) {
+				logger.error(BookingAppConstants.INVALID_HOLD_ID);
+				return BookingAppConstants.ERROR;
+			}
 			SeatReserve seatReserve = VenueUtil.holdToReserved(this.venue.getSeatHolds().get(seatHoldId));
 			this.venue.getSeatReserved().put(seatHoldId, seatReserve);
 			this.venue.getSeatHolds().remove(seatHoldId);
