@@ -38,12 +38,17 @@ To tail the logs, as we test the application through the CLI client, use the fol
 
      mvn clean package
 		
-    This would download any dependencies and compile the source, run the unit tests and package the application as a Jar in the "target" directory.
+     This would download any dependencies and compile the source, run the unit tests and package the application as a Jar in the "target" directory.
+    
 4. After a successful build, to just run the Unit test cases alone, use the following command.
 
      mvn compile test
 
-
+	 Please note the following:
+	 1. the Unit testcases assume the Venu is configured with a minimum capacity of 25 Seats. If they are run with the Venue initialized for a lesser number of seats, they may fail.
+	 2. Each unit testcase would validate more than one outcomes possible for that function.
+	 3. The Evictor Thread testcases would take some time, as it tests the thread going to sleep and then waking up to reclaim seats.
+	 
 # TEST USING CLI
 The sample CLI client attached can be used to hold, reserve tickets in realtime, by answering to the prompts. 
 Use the following command when in the MyBookingApp directory for launching the client.
@@ -85,5 +90,6 @@ The above values can be configured in the MyBookingApp/pom.xml file. Edit the fo
   
 &lt;/properties&gt;
 
-# NOTE: The values shown above are the default values used by the application, if not customized.
+# NOTE: 
+	The values shown above are the default values used by the application, if not customized.
 
