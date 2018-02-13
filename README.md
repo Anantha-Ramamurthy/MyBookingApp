@@ -14,6 +14,7 @@ Note: All commands in this document are to be run from the application root dire
 1. The seats are always numbered starting from 1 to N (configurable) - 1 being the closest to the stage and N being the farthest.
 2. The best seats are the ones closer to the stage. 
 3. All data is managed in-memory and there is no persistent storage or data services in this implementation.
+4. Email ID format validation is not part of the scope.
 
 
 # ENVIRONMENT SET UP (Prerequisite)
